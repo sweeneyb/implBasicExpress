@@ -44,7 +44,7 @@ function doGet(what) {
 }
 get(doGet)
 
-function doPut(what) {
+// this is starting to look a lot like express
+put(function doPut(what) {
     console.log("put", what)
-}
-put(doPut)
+})
