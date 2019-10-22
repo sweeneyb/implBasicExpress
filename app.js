@@ -3,6 +3,17 @@ var readline = require('readline'),
   prefix = '> ';
 
 rl.on('line', function(line) {
+  doStuff(line)
+  rl.setPrompt(prefix, prefix.length);
+  rl.prompt();
+}).on('close', function() {
+  process.exit(0);
+});
+// console.log(prefix);
+rl.setPrompt(prefix, prefix.length);
+rl.prompt();
+
+function doStuff(line) {
     var split = line.split(" ")
     switch ( split[0].trim() ) {
         case 'GET':
@@ -14,11 +25,4 @@ rl.on('line', function(line) {
         default:
           console.log("unknown command")
     }
-  rl.setPrompt(prefix, prefix.length);
-  rl.prompt();
-}).on('close', function() {
-  process.exit(0);
-});
-// console.log(prefix);
-rl.setPrompt(prefix, prefix.length);
-rl.prompt();
+}
