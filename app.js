@@ -16,12 +16,21 @@ function doStuff(line) {
     var split = line.split(" ")
     switch ( split[0].trim() ) {
         case 'GET':
-          console.log( "get ", split[1])
-          break;
+          doGet(split[1].trim())
+          break
         case 'PUT': 
-          console.log( "put", split[1])
-          break;
+          doPut(split[1].trim())
+          break
         default:
           console.log("unknown command")
     }
 }
+
+function doGet(what) {
+    console.log("get", what);
+}
+
+function doPut(what) {
+    console.log("put", what)
+}
+
