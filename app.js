@@ -12,14 +12,20 @@ rl.on('line', function(line) {
 rl.setPrompt(prefix, prefix.length);
 rl.prompt();
 
+var handlers = {}
+
+handlers["GET"] = doGet
+handlers["PUT"] = doPut
+
 function doStuff(line) {
     var split = line.split(" ")
     switch ( split[0].trim() ) {
         case 'GET':
-          doGet(split[1].trim())
+          var hanlder = handlers["GET"]
+          hanlder(split[1])
           break
         case 'PUT': 
-          doPut(split[1].trim())
+          handlers["PUT"](split[1])
           break
         default:
           console.log("unknown command")
