@@ -9,7 +9,6 @@ rl.on('line', function(line) {
 }).on('close', function() {
   process.exit(0);
 });
-// console.log(prefix);
 rl.setPrompt(prefix, prefix.length);
 rl.prompt();
 
