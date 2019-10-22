@@ -14,8 +14,12 @@ rl.prompt();
 
 var handlers = {}
 
-handlers["GET"] = doGet
-handlers["PUT"] = doPut
+function get( getFn) {
+    handlers["GET"] = getFn
+}
+function put(putFn) { 
+    handlers["PUT"] = putFn
+}
 
 function doStuff(line) {
     var split = line.split(" ")
@@ -32,11 +36,15 @@ function doStuff(line) {
     }
 }
 
+// above this comment is "framework" stuff.  It handles common tasks
+// below this comment is configuring the framework & specifying what gets done.
+
 function doGet(what) {
     console.log("get", what);
 }
+get(doGet)
 
 function doPut(what) {
     console.log("put", what)
 }
-
+put(doPut)
