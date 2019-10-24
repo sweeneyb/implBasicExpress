@@ -47,24 +47,27 @@ function deferRequest(method, path) {
     if (handler == undefined) {
         console.log("404 - not found")
     } else {
-        handler(path)
+        let request = {}
+        request.baseUrl = path
+        let response = {}
+        handler(request, response)
     }
 }
 
 // above this comment is "framework" stuff.  It handles common tasks
 // below this comment is configuring the framework & specifying what gets done.
 
-function doRoot(what) {
-    console.log("get root\n\n", what);
+function doRoot(request, response) {
+    console.log("get root\n\n", request.baseUrl);
 }
 
-function doGet2(what) {
-    console.log("get2\n\n", what);
+function doGet2(request, response) {
+    console.log("get2\n\n", request.baseUrl);
 }
 get("/", doRoot)
 get("/get2", doGet2)
 
 // this is starting to look a lot like express
-put("/", function doPut(what) {
-    console.log("put", what)
+put("/", function doPut(request, response) {
+    console.log("put", request.baseUrl)
 })
