@@ -66,12 +66,12 @@ function doRoot(request, response) {
 }
 
 function doGet2(request, response) {
-    response.send("get2 ", request.baseUrl);
+    response.send("get2 "+ request.baseUrl);
 }
 get("/", doRoot)
 get("/get2", doGet2)
 
 // this is starting to look a lot like express
 put("/", function doPut(request, response) {
-    response.send("put ", request.baseUrl)
+    response.send("put "+ request.baseUrl)
 })
