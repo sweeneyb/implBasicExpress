@@ -2,6 +2,8 @@ var readline = require('readline'),
   rl = readline.createInterface(process.stdin, process.stdout),
   prefix = '> ';
 
+
+  // derived from https://gist.github.com/initlove/2478016
 rl.on('line', function(line) {
   doStuff(line)
   rl.setPrompt(prefix, prefix.length);
