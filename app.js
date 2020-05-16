@@ -1,3 +1,8 @@
+const express = require('express')
+const app = express()
+const port = 3000
+app.listen(port)
+
 var readline = require('readline'),
     rl = readline.createInterface(process.stdin, process.stdout),
     prefix = '> ';
@@ -48,13 +53,23 @@ function deferRequest(method, path) {
         console.log("404 - not found")
     } else {
         let request = {}
-        request.baseUrl = path
-        let response = {}
-        response.send = function(message) {
-            this.message = message
+        request.route = {}
+        request.route.path = path
+        let response = {
+            rc: undefined,
+            message: undefined,
+            status: function(code) {
+                console.log("accepting code " +code)
+                this.rc = code
+
+                return this
+            },
+            send: function( message ) {
+                this.message = message
+            }
         }
         handler(request, response)
-        console.log(response.message, "\n\n")
+        console.log(response.rc, " ", response.message, "\n\n")
     }
 }
 
@@ -62,16 +77,24 @@ function deferRequest(method, path) {
 // below this comment is configuring the framework & specifying what gets done.
 
 function doRoot(request, response) {
-    response.send("get root")
+    response.status(200).send("get root")
 }
 
 function doGet2(request, response) {
-    response.send("get2 "+ request.baseUrl);
+    response.status(200).send("get2: " + request.route.path);
 }
 get("/", doRoot)
 get("/get2", doGet2)
+app.get('/', doRoot)
+app.get("/get2", doGet2)
+
+
 
 // this is starting to look a lot like express
 put("/", function doPut(request, response) {
-    response.send("put "+ request.baseUrl)
+    response.status(200).send("put "+ request.route.path)
 })
+app.post("/", function doPut(request, response) {
+    response.status(200).send("put "+ request.route.path)
+})
+
